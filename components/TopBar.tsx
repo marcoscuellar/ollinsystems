@@ -1,0 +1,30 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import SupportWidget from "@/components/SupportWidget";
+
+const TITLE_MAP: Record<string, [string, string]> = {
+  "/": ["Today", "Your queue is ready. Start at the top."],
+  "/hunt": ["Hunt", "New companies showing real signals"],
+  "/accounts": ["Accounts", "Every account, one record, both layers"],
+  "/campaigns": ["Campaigns", "Prepared by Intelligence. Run by Action."],
+  "/activity": ["Activity", "Everything that happened, in one thread"],
+};
+
+export default function TopBar() {
+  const pathname = usePathname();
+  const key = "/" + (pathname.split("/")[1] ?? "");
+  const [title, sub] = TITLE_MAP[key] ?? ["OLLIN", "Intelligence meets action."];
+
+  return (
+    <header className="sticky top-0 z-[5] flex items-center justify-between border-b border-muted-line bg-night/90 px-[34px] py-5 backdrop-blur-md">
+      <div>
+        <div className="font-display text-[22px] font-bold tracking-[-0.01em] text-paper">{title}</div>
+        <div className="mt-[2px] text-[13px] text-muted-fog">{sub}</div>
+      </div>
+      <div className="flex items-center gap-3">
+        <SupportWidget />
+      </div>
+    </header>
+  );
+}
