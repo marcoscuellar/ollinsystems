@@ -8,10 +8,10 @@ const URGENCY_DOTS: Record<Account["urgency"], number> = { High: 3, Medium: 2, L
 
 const STATUS_STYLE: Record<Account["status"], string> = {
   "Reply needs action": "bg-mint text-ink",
-  "Touch due today": "bg-paper text-ink",
-  "Ready for review": "bg-mist/15 text-mist",
-  "Campaign awaiting approval": "bg-mist/15 text-mist",
-  "Follow-up due": "bg-mist/10 text-muted-fog",
+  "Touch due today": "bg-lite-raised text-onlite",
+  "Ready for review": "bg-lite-raised text-onlite-fog",
+  "Campaign awaiting approval": "bg-lite-raised text-onlite-fog",
+  "Follow-up due": "bg-lite-raised text-onlite-fog",
 };
 
 function QueueCard({ a, first }: { a: Account; first: boolean }) {
@@ -19,13 +19,13 @@ function QueueCard({ a, first }: { a: Account; first: boolean }) {
     <Link
       href={`/accounts/${a.id}`}
       className={`group block rounded-card p-6 transition-colors ${
-        first ? "bg-mint text-ink" : "bg-ink hover:bg-raised"
+        first ? "bg-mint text-ink" : "bg-lite hover:bg-lite-raised"
       }`}
     >
       <div className="flex items-start justify-between gap-4">
         <div>
           <div className="font-display text-[19px] font-bold tracking-[-0.01em]">{a.name}</div>
-          <div className={`mt-[2px] text-[12px] ${first ? "text-ink/70" : "text-muted-fog"}`}>
+          <div className={`mt-[2px] text-[12px] ${first ? "text-ink/70" : "text-onlite-fog"}`}>
             {a.industry} · {a.location}
           </div>
         </div>
@@ -38,13 +38,13 @@ function QueueCard({ a, first }: { a: Account; first: boolean }) {
         </span>
       </div>
 
-      <div className={`mt-4 grid grid-cols-[1fr_auto] items-end gap-4 border-t pt-4 ${first ? "border-ink/15" : "border-muted-line"}`}>
+      <div className={`mt-4 grid grid-cols-[1fr_auto] items-end gap-4 border-t pt-4 ${first ? "border-ink/15" : "border-lite-line"}`}>
         <div className="min-w-0">
-          <div className={`font-mono text-[10px] tracking-[0.08em] ${first ? "text-ink/60" : "text-onink-faint"}`}>
+          <div className={`font-mono text-[10px] tracking-[0.08em] ${first ? "text-ink/60" : "text-onlite-faint"}`}>
             SIGNAL · {a.signalPillar.toUpperCase()}
           </div>
           <div className="mt-1 truncate text-[14px] font-semibold">{a.primarySignal}</div>
-          <div className={`mt-2 text-[13px] ${first ? "text-ink/75" : "text-muted-fog"}`}>
+          <div className={`mt-2 text-[13px] ${first ? "text-ink/75" : "text-onlite-fog"}`}>
             Emphasize: <span className="font-semibold">{a.offering.primary}</span>
             {" · "}
             {a.openRoles.length} verified open role{a.openRoles.length === 1 ? "" : "s"}
@@ -62,7 +62,7 @@ function QueueCard({ a, first }: { a: Account; first: boolean }) {
                       : "bg-mint"
                     : first
                       ? "bg-ink/20"
-                      : "bg-mist/15"
+                      : "bg-[rgba(10,16,14,0.14)]"
                 }`}
               />
             ))}
@@ -71,7 +71,7 @@ function QueueCard({ a, first }: { a: Account; first: boolean }) {
             className={`inline-flex items-center gap-2 rounded-btn px-4 py-2 font-display text-[12.5px] font-bold transition-colors ${
               first
                 ? "bg-ink text-paper group-hover:bg-ink/90"
-                : "bg-paper text-ink group-hover:bg-mint"
+                : "bg-ink text-paper group-hover:bg-mint group-hover:text-ink"
             }`}
           >
             {a.nextAction}
@@ -103,13 +103,13 @@ export default function TodayPage() {
         {statCards.map((s) => (
           <div
             key={s.label}
-            className={`rounded-card p-5 ${s.hot ? "bg-mint text-ink" : "bg-ink"}`}
+            className={`rounded-card p-5 ${s.hot ? "bg-mint text-ink" : "bg-lite"}`}
           >
-            <div className={`font-mono text-[10px] tracking-[0.08em] ${s.hot ? "text-ink/60" : "text-onink-faint"}`}>
+            <div className={`font-mono text-[10px] tracking-[0.08em] ${s.hot ? "text-ink/60" : "text-onlite-faint"}`}>
               {s.label}
             </div>
             <div className="mt-[6px] font-display text-[38px] font-bold leading-[1.1]">{s.value}</div>
-            <div className={`text-[12px] ${s.hot ? "text-ink/70" : "text-muted-fog"}`}>
+            <div className={`text-[12px] ${s.hot ? "text-ink/70" : "text-onlite-fog"}`}>
               {s.hot ? "a human is waiting" : "in your queue"}
             </div>
           </div>
@@ -120,8 +120,8 @@ export default function TodayPage() {
         {/* The queue — ranked, prepared, one obvious starting point. */}
         <div className="flex flex-col gap-3">
           <div className="flex items-center justify-between px-1">
-            <span className="font-display text-[17px] font-semibold text-paper">Your queue</span>
-            <span className="font-mono text-[11px] text-onink-faint">RANKED BY OLLIN — START AT THE TOP</span>
+            <span className="font-display text-[17px] font-semibold text-onlite">Your queue</span>
+            <span className="font-mono text-[11px] text-onlite-faint">RANKED BY OLLIN — START AT THE TOP</span>
           </div>
           {queue.length === 0 ? (
             <EmptyState
@@ -136,43 +136,43 @@ export default function TodayPage() {
 
         {/* Right rail — context, not clutter. */}
         <div className="flex flex-col gap-4">
-          <div className="rounded-card bg-ink p-6">
-            <div className="font-mono text-[10px] tracking-[0.08em] text-onink-faint">WHY THIS ORDER</div>
-            <p className="mt-3 text-[13.5px] leading-[1.6] text-onink-soft">
+          <div className="rounded-card bg-lite p-6">
+            <div className="font-mono text-[10px] tracking-[0.08em] text-onlite-faint">WHY THIS ORDER</div>
+            <p className="mt-3 text-[13.5px] leading-[1.6] text-onlite-soft">
               Replies first — a person is waiting. Then touches due today, then fresh intelligence
               ready for review, then follow-ups. You never decide where to begin.
             </p>
           </div>
 
-          <div className="rounded-card bg-ink p-6">
+          <div className="rounded-card bg-lite p-6">
             <div className="flex items-center justify-between">
-              <div className="font-mono text-[10px] tracking-[0.08em] text-onink-faint">CRM</div>
+              <div className="font-mono text-[10px] tracking-[0.08em] text-onlite-faint">CRM</div>
               <span className="flex items-center gap-[6px] font-mono text-[10px] text-mint">
                 <span className="h-[6px] w-[6px] animate-pulseDot rounded-full bg-mint" />
                 {demo ? "HUBSPOT · SYNCED" : "NOT CONNECTED"}
               </span>
             </div>
-            <p className="mt-3 text-[13.5px] leading-[1.6] text-onink-soft">
+            <p className="mt-3 text-[13.5px] leading-[1.6] text-onlite-soft">
               {demo
                 ? "Accounts, contacts, and every touch push to HubSpot automatically. OLLIN stays the working surface; your CRM stays the record."
                 : "Connect HubSpot, Salesforce, or Bullhorn — or run everything here and let OLLIN be the record."}
             </p>
-            <button className="mt-4 w-full rounded-btn bg-mist py-[10px] font-display text-[12.5px] font-bold text-ink transition-colors hover:bg-paper">
+            <button className="mt-4 w-full rounded-btn bg-ink py-[10px] font-display text-[12.5px] font-bold text-paper transition-colors hover:bg-raised">
               {demo ? "Manage connection" : "Connect a CRM"}
             </button>
           </div>
 
-          <div className="rounded-card bg-ink p-6">
-            <div className="font-mono text-[10px] tracking-[0.08em] text-onink-faint">PIPELINE PULSE</div>
+          <div className="rounded-card bg-lite p-6">
+            <div className="font-mono text-[10px] tracking-[0.08em] text-onlite-faint">PIPELINE PULSE</div>
             <div className="mt-3 flex flex-col gap-[10px]">
               {[
                 ["Active campaigns", demo ? "4" : "0"],
                 ["Verified open roles tracked", demo ? "12" : "0"],
                 ["Accounts in nurture", demo ? "1" : "0"],
               ].map(([k, v]) => (
-                <div key={k} className="flex items-center justify-between border-b border-muted-line pb-[10px] last:border-0 last:pb-0">
-                  <span className="text-[13px] text-onink-soft">{k}</span>
-                  <span className="font-display text-[15px] font-bold text-paper">{v}</span>
+                <div key={k} className="flex items-center justify-between border-b border-lite-line pb-[10px] last:border-0 last:pb-0">
+                  <span className="text-[13px] text-onlite-soft">{k}</span>
+                  <span className="font-display text-[15px] font-bold text-onlite">{v}</span>
                 </div>
               ))}
             </div>

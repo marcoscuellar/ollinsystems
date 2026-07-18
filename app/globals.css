@@ -74,6 +74,25 @@ input:focus {
     0 16px 40px -20px rgba(0, 0, 0, 0.5);
 }
 
+/* Light workspace: the dark sidebar/top bar stay as-is; only the main content
+   area flips to white. White cards separate from the white surface with a soft
+   ink-tinted lift — a "not-so-black" shadow (ink #0A100E, low opacity) rather
+   than pure black. Scoped to .lite so the sidebar's dark card keeps its depth. */
+.lite {
+  background: #ffffff;
+  color: #0a100e;
+}
+.lite .rounded-card,
+.lite .rounded-panel {
+  box-shadow:
+    0 1px 2px rgba(10, 16, 14, 0.05),
+    0 12px 30px -16px rgba(10, 16, 14, 0.18);
+}
+.lite ::selection {
+  background: var(--mint);
+  color: var(--ink);
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,

@@ -31,6 +31,22 @@ const config: Config = {
         mist: "#E3E9E7", // light surface + primary text on dark
         paper: "#F9FEF9", // brightest — pills/chips on dark
 
+        // Light workspace — dark chrome (sidebar/top bar) over a white content
+        // area. Cards are white; separation comes from a soft ink-tinted
+        // shadow, never pure-black. Text inverts to ink on these surfaces.
+        lite: {
+          DEFAULT: "#FFFFFF", // white card + content surface
+          raised: "#F3F5F4", // hover / nested box on light
+          line: "rgba(10, 16, 14, 0.09)", // hairline on light
+          soft: "rgba(10, 16, 14, 0.16)", // dashed / stronger hairline
+        },
+        onlite: {
+          DEFAULT: "#0A100E", // primary text on light
+          soft: "rgba(10, 16, 14, 0.66)", // body text on light
+          fog: "rgba(10, 16, 14, 0.55)", // secondary text on light
+          faint: "rgba(10, 16, 14, 0.42)", // labels / eyebrows on light
+        },
+
         // Legacy token names kept so shared components (login, demo toggle,
         // empty states) render correctly on the dark system without a rewrite.
         volt: "#64D99E",

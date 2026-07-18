@@ -14,9 +14,9 @@ export default async function AppLayout({ children }: { children: React.ReactNod
       <SyncProvider authed={Boolean(session?.user)} />
       <div className="grid min-h-screen grid-cols-[236px_1fr]">
         <Sidebar userEmail={session?.user?.email ?? undefined} demo={demo} />
-        <div className="min-w-0">
+        <div className="flex min-w-0 flex-col">
           <TopBar />
-          <main className="animate-rise">{children}</main>
+          <main className="lite animate-rise flex-1">{children}</main>
         </div>
       </div>
     </>
