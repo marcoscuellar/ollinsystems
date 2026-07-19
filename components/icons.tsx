@@ -77,6 +77,13 @@ export const ActivityIcon = ({ size = 18, className }: IconProps) => (
   </svg>
 );
 
+export const TalentIcon = ({ size = 18, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="12" cy="8" r="3.2" />
+    <path d="M5.5 20c0-3.6 2.9-6.5 6.5-6.5s6.5 2.9 6.5 6.5" />
+  </svg>
+);
+
 export const PlusIcon = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <path d="M12 5v14M5 12h14" />

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import type { ComponentType } from "react";
 import {
   OllinMark,
   TodayIcon,
@@ -9,16 +10,24 @@ import {
   AccountsIcon,
   CampaignsIcon,
   ActivityIcon,
+  TalentIcon,
 } from "@/components/icons";
 import SignOutButton from "@/components/SignOutButton";
 import DemoToggle from "@/components/DemoToggle";
 
-const NAV = [
+type IconType = ComponentType<{ size?: number; className?: string }>;
+type NavItem =
+  | { group: string }
+  | { href: string; label: string; Icon: IconType; child?: boolean };
+
+const NAV: NavItem[] = [
   { href: "/", label: "Today", Icon: TodayIcon },
-  { href: "/hunt", label: "Hunt", Icon: HuntIcon },
-  { href: "/accounts", label: "Accounts", Icon: AccountsIcon },
-  { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon },
-  { href: "/activity", label: "Activity", Icon: ActivityIcon },
+  { href: "/hunt", label: "Action", Icon: HuntIcon },
+  { group: "PIPELINE" },
+  { href: "/accounts", label: "Accounts", Icon: AccountsIcon, child: true },
+  { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon, child: true },
+  { href: "/activity", label: "Stats", Icon: ActivityIcon },
+  { href: "/talent-showcase", label: "Talent Showcase", Icon: TalentIcon },
 ];
 
 function initials(name: string) {
@@ -39,8 +48,10 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
   const displayName = userEmail ? userEmail.split("@")[0] : "You";
   const subline = userEmail || "Not signed in";
 
-  const navLinkClass = (active: boolean) =>
-    `flex w-full items-center gap-[11px] rounded-btn px-[16px] py-[11px] text-left font-display text-sm font-semibold transition-colors ${
+  const navLinkClass = (active: boolean, child?: boolean) =>
+    `flex w-full items-center gap-[11px] rounded-btn py-[11px] text-left font-display text-sm font-semibold transition-colors ${
+      child ? "pl-[32px] pr-[16px]" : "px-[16px]"
+    } ${
       active
         ? "bg-mist text-ink"
         : "bg-transparent text-onink-soft hover:bg-white/[0.05] hover:text-mist"
@@ -54,10 +65,21 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
       </Link>
 
       <nav className="flex flex-col gap-1">
-        {NAV.map(({ href, label, Icon }) => {
+        {NAV.map((item, i) => {
+          if ("group" in item) {
+            return (
+              <div
+                key={`g-${i}`}
+                className="px-[16px] pb-1 pt-3 font-mono text-[10px] tracking-[0.1em] text-onink-faint"
+              >
+                {item.group}
+              </div>
+            );
+          }
+          const { href, label, Icon, child } = item;
           const active = isActive(href);
           return (
-            <Link key={href} href={href} className={navLinkClass(active)}>
+            <Link key={href} href={href} className={navLinkClass(active, child)}>
               <Icon />
               {label}
             </Link>

@@ -5,10 +5,12 @@ import SupportWidget from "@/components/SupportWidget";
 
 const TITLE_MAP: Record<string, [string, string]> = {
   "/": ["Today", "Your queue is ready. Start at the top."],
-  "/hunt": ["Hunt", "New companies showing real signals"],
+  "/hunt": ["Action", "New companies showing real signals"],
   "/accounts": ["Accounts", "Every account, one record, both layers"],
   "/campaigns": ["Campaigns", "Prepared by Intelligence. Run by Action."],
-  "/activity": ["Activity", "Everything that happened, in one thread"],
+  "/activity": ["Stats", "Volume, replies, and what happened"],
+  "/talent-showcase": ["Talent Showcase", "Bench-ready candidates, matched to open reqs"],
+  "/redeploy": ["Redeploy", "Place rolling-off talent into new roles"],
 };
 
 export default function TopBar() {

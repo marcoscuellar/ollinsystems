@@ -1,23 +1,24 @@
 import Link from "next/link";
+import LiveDate from "@/components/LiveDate";
 import { ArrowIcon } from "@/components/icons";
 
 // The "Morning, {name}" brief — a personalized, dark hero card that opens the
-// Today page. It reads OLLIN's overnight run back to the user in one line and
-// points at the single obvious next move. Dark card on the white workspace,
-// floating with the same soft drop shadow as the queue cards below it.
+// Today dashboard. Live date/time eyebrow, a one-line rundown of the overnight
+// run, and the single obvious next move. Dark card floating on the white
+// workspace with the same soft drop shadow as every other card.
 export default function GreetingHero({
   name,
   demo,
   total,
-  replies,
   touchesDue,
+  leftover,
   ctaHref,
 }: {
   name: string;
   demo: boolean;
   total: number;
-  replies: number;
   touchesDue: number;
+  leftover: number;
   ctaHref: string;
 }) {
   return (
@@ -29,7 +30,7 @@ export default function GreetingHero({
       />
       <div className="relative">
         <div className="font-mono text-[11px] tracking-[0.16em] text-mint">
-          {demo ? "OVERNIGHT RUN COMPLETE · INTELLIGENCE READY" : "OLLIN INTELLIGENCE · STANDING BY"}
+          <LiveDate />
         </div>
 
         <h1 className="mt-3 font-display text-[34px] font-bold leading-[1.08] tracking-[-0.01em] text-paper">
@@ -39,30 +40,14 @@ export default function GreetingHero({
         <p className="mt-4 max-w-[56ch] text-[16px] leading-[1.55] text-onink-soft">
           {demo ? (
             <>
-              I ran the pipeline overnight.{" "}
-              <b className="font-semibold text-paper">
-                {total} account{total === 1 ? "" : "s"}
-              </b>{" "}
-              cleared audit with live buying signals
-              {replies > 0 ? (
+              Quick rundown: <b className="font-semibold text-paper">{total} accounts</b> ready and{" "}
+              <b className="font-semibold text-paper">{touchesDue} touches</b> due today
+              {leftover > 0 ? (
                 <>
-                  {" — "}
-                  <span className="font-semibold text-mint">
-                    {replies} repl{replies === 1 ? "y" : "ies"}
-                  </span>{" "}
-                  waiting
+                  , plus <b className="font-semibold text-paper">{leftover}</b> left over from yesterday
                 </>
               ) : null}
-              {touchesDue > 0 ? (
-                <>
-                  {", "}
-                  <b className="font-semibold text-paper">
-                    {touchesDue} touch{touchesDue === 1 ? "" : "es"}
-                  </b>{" "}
-                  due today
-                </>
-              ) : null}
-              . Start at the top.
+              . Start at the top. Remember — we got you.
             </>
           ) : (
             <>
