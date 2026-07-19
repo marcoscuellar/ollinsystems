@@ -38,7 +38,7 @@ export default function AccountBriefPage({ params }: { params: { id: string } })
   };
 
   return (
-    <div className="flex flex-col gap-4 px-[34px] py-8">
+    <div className="flex flex-col gap-4 px-[56px] py-8">
       {/* Header band — dark card, one mint element: the next action. */}
       <Card className="flex items-start justify-between gap-6">
         <div>

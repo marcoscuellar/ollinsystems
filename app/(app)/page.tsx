@@ -42,7 +42,7 @@ export default async function TodayPage() {
   ];
 
   return (
-    <div className="flex flex-col gap-[22px] px-[34px] py-8">
+    <div className="flex flex-col gap-[22px] px-[56px] py-8">
       <GreetingHero
         name={name}
         demo={demo}

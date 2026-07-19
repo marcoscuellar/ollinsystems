@@ -9,7 +9,7 @@ export default function AccountsPage() {
   const accounts = demo ? ACCOUNTS : [];
 
   return (
-    <div className="flex flex-col gap-4 px-[34px] py-8">
+    <div className="flex flex-col gap-4 px-[56px] py-8">
       {accounts.length === 0 ? (
         <EmptyState
           title="No accounts yet"

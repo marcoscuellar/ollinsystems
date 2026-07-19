@@ -17,7 +17,7 @@ export default function ActivityPage() {
   const items = demo ? ACTIVITY : [];
 
   return (
-    <div className="flex flex-col gap-4 px-[34px] py-8">
+    <div className="flex flex-col gap-4 px-[56px] py-8">
       {items.length === 0 ? (
         <EmptyState title="No activity yet" sub="Every message, call, note, reply, and CRM update lands here — one thread." />
       ) : (

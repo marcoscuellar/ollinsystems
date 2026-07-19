@@ -7,7 +7,7 @@ export default function HuntPage() {
   const feed = demo ? HUNT_FEED : [];
 
   return (
-    <div className="flex flex-col gap-4 px-[34px] py-8">
+    <div className="flex flex-col gap-4 px-[56px] py-8">
       {feed.length === 0 ? (
         <EmptyState
           title="No new signals yet"

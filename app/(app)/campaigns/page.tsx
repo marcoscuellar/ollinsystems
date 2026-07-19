@@ -11,7 +11,7 @@ export default function CampaignsPage() {
   const accounts = demo ? ACCOUNTS : [];
 
   return (
-    <div className="flex flex-col gap-6 px-[34px] py-8">
+    <div className="flex flex-col gap-6 px-[56px] py-8">
       {accounts.length === 0 ? (
         <EmptyState
           title="No campaigns yet"
