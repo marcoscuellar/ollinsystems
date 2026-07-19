@@ -23,7 +23,7 @@ type NavItem =
 
 const NAV: NavItem[] = [
   { href: "/", label: "Today", Icon: TodayIcon },
-  { href: "/hunt", label: "Action", Icon: HuntIcon },
+  { href: "/hunt", label: "Movement", Icon: HuntIcon },
   { group: "PIPELINE", href: "/pipeline" },
   { href: "/accounts", label: "Accounts", Icon: AccountsIcon, child: true },
   { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon, child: true },
