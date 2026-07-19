@@ -25,11 +25,12 @@ const config: Config = {
         raised: "#101915", // raised dark surface (hover, nested)
         mint: {
           DEFAULT: "#64D99E",
-          deep: "#3FBF7F", // hover state on mint
+          deep: "#35B779", // locked OLLIN hover / movement state
           tint: "rgba(100, 217, 158, 0.12)", // mint wash on dark
         },
         mist: "#E3E9E7", // light surface + primary text on dark
         paper: "#F9FEF9", // brightest — pills/chips on dark
+        sage: "#A9B9B1", // secondary brand tone
 
         // Light workspace — dark chrome (sidebar/top bar) over a white content
         // area. Cards are white; separation comes from a soft ink-tinted
@@ -60,7 +61,7 @@ const config: Config = {
         muted: {
           line: "rgba(227, 233, 231, 0.10)", // hairline on dark
           soft: "rgba(227, 233, 231, 0.22)",
-          sage: "rgba(227, 233, 231, 0.40)",
+          sage: "#A9B9B1",
           fog: "rgba(227, 233, 231, 0.55)", // secondary text on dark
           deep: "#E3E9E7",
         },
@@ -74,7 +75,7 @@ const config: Config = {
         slate: "rgba(227, 233, 231, 0.72)",
         olive: {
           DEFAULT: "#64D99E",
-          deep: "#3FBF7F",
+          deep: "#35B779",
         },
         // Status-only semantics: mint = verified/on-track, red = needs action.
         verified: {
@@ -88,9 +89,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"], // Sora
-        body: ["var(--font-instrument-sans)", "system-ui", "sans-serif"], // Work Sans
-        mono: ["var(--font-space-mono)", "monospace"], // Space Mono
+        display: ["var(--font-display)", "sans-serif"], // Inter / SF Pro
+        body: ["var(--font-instrument-sans)", "system-ui", "sans-serif"], // Inter / SF Pro
+        mono: ["var(--font-space-mono)", "monospace"], // SF Mono
       },
       borderRadius: {
         btn: "999px", // pills — the signature capsule device
