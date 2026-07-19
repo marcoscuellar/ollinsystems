@@ -38,8 +38,6 @@ export default async function TodayPage() {
 
   const statCards: { label: string; value: number; sub: string; tone: Tone; href?: string }[] = [
     { label: "GOALS FOR TODAY", value: demo ? 50 : 0, sub: "today's target", tone: "mint" },
-    { label: "TOUCHES DUE", value: stats.touchesDue, sub: "in your queue", tone: "dark" },
-    { label: "READY FOR REVIEW", value: stats.readyForReview, sub: "in your queue", tone: "dark" },
     { label: "REDEPLOY", value: demo ? 1 : 0, sub: "talent showcase", tone: "coral", href: "/redeploy" },
   ];
 
@@ -54,8 +52,8 @@ export default async function TodayPage() {
         ctaHref={demo && queue.length > 0 ? `/accounts/${queue[0].id}` : "/hunt"}
       />
 
-      {/* Stat grid — mint "goals" and coral "redeploy" are the two hot cards. */}
-      <div className="grid grid-cols-4 gap-4">
+      {/* Stat grid — the two hot cards: mint "goals" and coral "redeploy". */}
+      <div className="grid grid-cols-2 gap-4">
         {statCards.map((s) => {
           const tone =
             s.tone === "mint" ? "bg-mint text-ink" : s.tone === "coral" ? "bg-alert text-ink" : "bg-ink";
