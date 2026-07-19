@@ -88,9 +88,9 @@ const config: Config = {
         },
       },
       fontFamily: {
-        display: ["var(--font-display)", "sans-serif"], // Space Grotesk
-        body: ["var(--font-instrument-sans)", "system-ui", "sans-serif"],
-        mono: ["var(--font-space-mono)", "monospace"], // IBM Plex Mono
+        display: ["var(--font-display)", "sans-serif"], // Sora
+        body: ["var(--font-instrument-sans)", "system-ui", "sans-serif"], // Work Sans
+        mono: ["var(--font-space-mono)", "monospace"], // Space Mono
       },
       borderRadius: {
         btn: "999px", // pills — the signature capsule device
