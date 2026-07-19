@@ -51,7 +51,7 @@ export default function GreetingHero({
             </>
           ) : (
             <>
-              Your queue is clear. Run a hunt and I&rsquo;ll fill this with prepared accounts —{" "}
+              Your queue is clear. When Intelligence prepares an opportunity, Movement will hold the account —{" "}
               <b className="font-semibold text-paper">signal, offering, contacts, campaign</b>. You never
               decide where to begin.
             </>
@@ -63,7 +63,7 @@ export default function GreetingHero({
             href={ctaHref}
             className="inline-flex items-center gap-2 rounded-btn bg-mint px-6 py-[13px] font-display text-[15px] font-bold text-ink transition-colors hover:bg-mint-deep"
           >
-            {demo ? "Start moving" : "Open Hunt"}
+            {demo ? "Start moving" : "Open Movement"}
             <ArrowIcon size={16} />
           </Link>
           {demo && (
