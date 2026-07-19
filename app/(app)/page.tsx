@@ -52,7 +52,7 @@ export default async function TodayPage() {
           <p className="mt-3 max-w-[620px] text-[14px] leading-6 text-onlite-fog">
             {demo
               ? "OLLIN prepared the opportunities. Start with the highest-leverage move and keep the thread going."
-              : "Your workspace is clear. Run a hunt and OLLIN will prepare the opportunity, strategy, and next move."}
+              : "Your workspace is clear. Intelligence will prepare the opportunity, strategy, and next move."}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -219,7 +219,7 @@ export default async function TodayPage() {
           </section>
         </>
       ) : (
-        <EmptyState title="Your movement starts with intelligence" sub="Run a hunt and OLLIN will prepare the account, verify the signal, map the people, and give you one clear next move." cta={{ href: "/hunt", label: "Run your first hunt →" }} />
+        <EmptyState title="Your movement starts with intelligence" sub="OLLIN will prepare the account, verify the signal, map the people, and give you one clear next move." cta={{ href: "/hunt", label: "Open Movement →" }} />
       )}
     </div>
   );
