@@ -16,7 +16,7 @@ export default function CampaignsPage() {
         <EmptyState
           title="No campaigns yet"
           sub="Campaigns are prepared inside each account brief, then run from here."
-          cta={{ href: "/hunt", label: "Open Hunt →" }}
+          cta={{ href: "/hunt", label: "Open Movement →" }}
         />
       ) : (
         ORDER.map((group) => {
