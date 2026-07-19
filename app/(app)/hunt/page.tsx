@@ -2,8 +2,8 @@ import EmptyState from "@/components/EmptyState";
 import ActionQueue from "@/components/action/ActionQueue";
 import { isDemo } from "@/lib/demo";
 
-// Action — the main working surface: today's ranked outreach queue.
-export default function ActionPage() {
+// Movement — the main working surface: today's ranked outreach queue.
+export default function MovementPage() {
   const demo = isDemo();
 
   return (
@@ -13,7 +13,7 @@ export default function ActionPage() {
       ) : (
         <EmptyState
           title="Your queue is empty"
-          sub="Run a hunt and OLLIN prepares each contact — the buying signal, the script, and the one next action."
+          sub="When Intelligence prepares an opportunity, Movement brings forward the contact, signal, message, and one next move."
           cta={{ href: "/", label: "Back to Today →" }}
         />
       )}
