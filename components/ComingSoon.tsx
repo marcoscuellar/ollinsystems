@@ -16,7 +16,7 @@ export default function ComingSoon({
   cta?: { href: string; label: string };
 }) {
   return (
-    <div className="flex flex-col gap-4 px-[56px] py-8">
+    <div className="flex flex-col gap-4 px-16 xl:px-32 py-8">
       <section className="relative overflow-hidden rounded-card bg-ink px-8 py-12">
         <div
           aria-hidden

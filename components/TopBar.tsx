@@ -19,7 +19,7 @@ export default function TopBar() {
   const [title, sub] = TITLE_MAP[key] ?? ["OLLIN", "Intelligence meets action."];
 
   return (
-    <header className="sticky top-0 z-[5] flex items-center justify-between border-b border-muted-line bg-night/90 px-[56px] py-5 backdrop-blur-md">
+    <header className="sticky top-0 z-[5] flex items-center justify-between border-b border-muted-line bg-night/90 px-16 xl:px-32 py-5 backdrop-blur-md">
       <div>
         <div className="font-display text-[22px] font-bold tracking-[-0.01em] text-paper">{title}</div>
         <div className="mt-[2px] text-[13px] text-muted-fog">{sub}</div>
