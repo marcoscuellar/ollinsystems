@@ -53,6 +53,15 @@ export const HuntIcon = ({ size = 18, className }: IconProps) => (
   </svg>
 );
 
+export const PipelineIcon = ({ size = 18, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="5" cy="7" r="1.5" />
+    <circle cx="5" cy="12" r="1.5" />
+    <circle cx="5" cy="17" r="1.5" />
+    <path d="M8.5 7H20M8.5 12H17M8.5 17H14" />
+  </svg>
+);
+
 export const AccountsIcon = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <path d="M4 20V6.5A1.5 1.5 0 0 1 5.5 5h7A1.5 1.5 0 0 1 14 6.5V20" />
