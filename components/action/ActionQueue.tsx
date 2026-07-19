@@ -155,7 +155,7 @@ function ActionCard({
   onScript: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-card bg-lite">
+    <div className="overflow-hidden rounded-[24px] bg-lite shadow-[0_4px_12px_rgba(10,60,32,0.14),0_24px_48px_-20px_rgba(10,60,32,0.35)]">
       {/* Collapsed header — the whole thing toggles expand */}
       <button
         onClick={onExpand}

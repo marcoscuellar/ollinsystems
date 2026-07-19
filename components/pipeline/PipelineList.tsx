@@ -113,7 +113,7 @@ function LeadCard({
   onRemove: () => void;
 }) {
   return (
-    <div className="overflow-hidden rounded-card bg-lite">
+    <div className="overflow-hidden rounded-[24px] bg-lite shadow-[0_4px_12px_rgba(10,60,32,0.14),0_24px_48px_-20px_rgba(10,60,32,0.35)]">
       <button onClick={onToggleOpen} className="relative block w-full cursor-pointer p-[20px_22px] text-left">
         <span
           className={`absolute right-[22px] top-[20px] whitespace-nowrap rounded-btn px-3 py-[6px] font-mono text-[10px] uppercase tracking-[0.06em] ${SOURCE_STYLE[l.source]}`}
