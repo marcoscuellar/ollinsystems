@@ -217,8 +217,8 @@ function ActionCard({
                       className="flex h-8 w-8 items-center justify-center rounded-full border-[1.5px] font-display text-[12px] font-bold"
                       style={{
                         background: isCurrent ? "#64D99E" : "transparent",
-                        color: isCurrent ? "#0A100E" : isPast ? "#3FBF7F" : "rgba(10,16,14,0.35)",
-                        borderColor: isCurrent ? "#64D99E" : isPast ? "#3FBF7F" : "rgba(10,16,14,0.2)",
+                        color: isCurrent ? "#0A100E" : isPast ? "#35B779" : "rgba(10,16,14,0.35)",
+                        borderColor: isCurrent ? "#64D99E" : isPast ? "#35B779" : "rgba(10,16,14,0.2)",
                       }}
                     >
                       {step}
@@ -259,8 +259,8 @@ function ActionCard({
               onClick={onReplied}
               className="rounded-btn border px-1 py-[11px] font-display text-[12px] font-semibold"
               style={{
-                borderColor: replied ? "#3FBF7F" : "rgba(10,16,14,0.2)",
-                color: replied ? "#3FBF7F" : "#0A100E",
+                borderColor: replied ? "#35B779" : "rgba(10,16,14,0.2)",
+                color: replied ? "#35B779" : "#0A100E",
               }}
             >
               {replied ? "Replied ✓" : "Replied"}
