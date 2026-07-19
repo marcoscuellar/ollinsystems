@@ -6,16 +6,19 @@ import { ArrowIcon } from "@/components/icons";
 import { isDemo } from "@/lib/demo";
 import { ACCOUNTS, TODAY_STATS, todayQueue, type Account } from "@/lib/ollin";
 
-// Pull a friendly first name off the account: an explicit name wins, otherwise
-// the leading letters of the email local-part; falls back to "there".
+// Pull a friendly first name off the signed-in account so the greeting conforms
+// to whoever the user is: the name they signed up with wins (first word), else a
+// clean name derived from the email local-part (first alphabetic segment, so
+// "marcos.cuellar" / "marcos_c" / "marcos99" all become "Marcos"); "there" only
+// when nobody is signed in.
 type SessionUser = { user?: { name?: string | null; email?: string | null } | null } | null;
 function firstName(session: SessionUser): string {
+  const cap = (s: string) => (s ? s.charAt(0).toUpperCase() + s.slice(1) : s);
   const raw = session?.user?.name?.trim();
-  if (raw) return raw.split(/\s+/)[0];
+  if (raw && !raw.includes("@")) return cap(raw.split(/\s+/)[0]);
   const local = session?.user?.email?.split("@")[0] ?? "";
-  const letters = local.match(/^[a-zA-Z]+/)?.[0];
-  if (letters) return letters.charAt(0).toUpperCase() + letters.slice(1);
-  return "there";
+  const token = local.split(/[^a-zA-Z]+/).find(Boolean);
+  return token ? cap(token) : "there";
 }
 
 const URGENCY_DOTS: Record<Account["urgency"], number> = { High: 3, Medium: 2, Low: 1 };

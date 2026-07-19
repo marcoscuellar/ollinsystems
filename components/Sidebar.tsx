@@ -47,7 +47,7 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
     }`;
 
   return (
-    <aside className="flex flex-col gap-[26px] border-r border-muted-line bg-ink px-4 py-[22px] text-mist">
+    <aside className="flex h-full flex-col gap-[26px] overflow-y-auto border-r border-muted-line bg-ink px-4 py-[22px] text-mist">
       <Link href="/" className="flex items-center gap-[11px] px-2 py-1">
         <OllinMark size={30} />
         <span className="font-display text-[19px] font-bold tracking-[0.04em] text-paper">OLLIN</span>
