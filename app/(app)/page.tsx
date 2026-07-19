@@ -1,8 +1,22 @@
 import Link from "next/link";
+import { auth } from "@/auth";
 import EmptyState from "@/components/EmptyState";
+import GreetingHero from "@/components/GreetingHero";
 import { ArrowIcon } from "@/components/icons";
 import { isDemo } from "@/lib/demo";
 import { ACCOUNTS, TODAY_STATS, todayQueue, type Account } from "@/lib/ollin";
+
+// Pull a friendly first name off the account: an explicit name wins, otherwise
+// the leading letters of the email local-part; falls back to "there".
+type SessionUser = { user?: { name?: string | null; email?: string | null } | null } | null;
+function firstName(session: SessionUser): string {
+  const raw = session?.user?.name?.trim();
+  if (raw) return raw.split(/\s+/)[0];
+  const local = session?.user?.email?.split("@")[0] ?? "";
+  const letters = local.match(/^[a-zA-Z]+/)?.[0];
+  if (letters) return letters.charAt(0).toUpperCase() + letters.slice(1);
+  return "there";
+}
 
 const URGENCY_DOTS: Record<Account["urgency"], number> = { High: 3, Medium: 2, Low: 1 };
 
@@ -83,8 +97,9 @@ function QueueCard({ a, first }: { a: Account; first: boolean }) {
   );
 }
 
-export default function TodayPage() {
+export default async function TodayPage() {
   const demo = isDemo();
+  const session = await auth();
   const accounts = demo ? ACCOUNTS : [];
   const stats = TODAY_STATS(accounts);
   const queue = todayQueue(accounts);
@@ -98,6 +113,17 @@ export default function TodayPage() {
 
   return (
     <div className="flex flex-col gap-[22px] px-[34px] py-8">
+      {/* The morning line — OLLIN reads the overnight run back and points at
+          the one obvious next move. */}
+      <GreetingHero
+        name={firstName(session)}
+        demo={demo}
+        total={queue.length}
+        replies={stats.replies}
+        touchesDue={stats.touchesDue}
+        ctaHref={demo && queue.length > 0 ? `/accounts/${queue[0].id}` : "/hunt"}
+      />
+
       {/* The morning line — the AE walks in and the list is waiting. */}
       <div className="grid grid-cols-4 gap-4">
         {statCards.map((s) => (
