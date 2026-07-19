@@ -8,6 +8,9 @@
   --mint: #64d99e;
   --mist: #e3e9e7;
   --paper: #f9fef9;
+  --font-display: Inter, "SF Pro Display", "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-instrument-sans: Inter, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-space-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 * {
