@@ -218,7 +218,7 @@ export default function AccountBriefPage({ params }: { params: { id: string } })
             <Eyebrow>NOTES · FOLLOWS THE ACCOUNT EVERYWHERE</Eyebrow>
             <div className="mt-3 flex flex-col gap-3">
               {a.notes.length === 0 ? (
-                <p className="text-[13px] text-muted-fog">No notes yet. Anything you capture here shows up in Action too.</p>
+                <p className="text-[13px] text-muted-fog">No notes yet. Anything you capture here shows up in Movement too.</p>
               ) : (
                 a.notes.map((n) => (
                   <div key={n.body} className="rounded-[16px] bg-raised p-4">
