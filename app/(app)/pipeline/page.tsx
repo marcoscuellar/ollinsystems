@@ -14,7 +14,7 @@ export default function PipelinePage() {
         <EmptyState
           title="No leads yet"
           sub="Every lead OLLIN sources — or that you upload — lands here across all your accounts."
-          cta={{ href: "/hunt", label: "Open Action →" }}
+          cta={{ href: "/hunt", label: "Open Movement →" }}
         />
       )}
     </div>
