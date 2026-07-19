@@ -5,10 +5,10 @@ import SupportWidget from "@/components/SupportWidget";
 
 const TITLE_MAP: Record<string, [string, string]> = {
   "/": ["Today", "Your queue is ready. Start at the top."],
-  "/hunt": ["Action", "New companies showing real signals"],
+  "/hunt": ["Movement", "Your prepared queue and every next move"],
   "/pipeline": ["Pipeline", "Every lead across every account"],
   "/accounts": ["Accounts", "Every account, one record, both layers"],
-  "/campaigns": ["Campaigns", "Prepared by Intelligence. Run by Action."],
+  "/campaigns": ["Campaigns", "Prepared by Intelligence. Kept moving here."],
   "/activity": ["Stats", "Volume, replies, and what happened"],
   "/talent-showcase": ["Talent Showcase", "Bench-ready candidates, matched to open reqs"],
   "/redeploy": ["Redeploy", "Place rolling-off talent into new roles"],
@@ -17,7 +17,7 @@ const TITLE_MAP: Record<string, [string, string]> = {
 export default function TopBar() {
   const pathname = usePathname();
   const key = "/" + (pathname.split("/")[1] ?? "");
-  const [title, sub] = TITLE_MAP[key] ?? ["OLLIN", "Intelligence meets action."];
+  const [title, sub] = TITLE_MAP[key] ?? ["OLLIN", "Intelligence in motion."];
 
   return (
     <header className="sticky top-0 z-[5] flex items-center justify-between border-b border-muted-line bg-night/90 px-16 xl:px-32 py-5 backdrop-blur-md">
