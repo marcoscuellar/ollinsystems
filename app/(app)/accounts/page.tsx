@@ -13,8 +13,8 @@ export default function AccountsPage() {
       ) : (
         <EmptyState
           title="No accounts yet"
-          sub="Accounts arrive from Action with the brief already written — signals, contacts, and last touches."
-          cta={{ href: "/hunt", label: "Open Action →" }}
+          sub="Accounts arrive from Intelligence with the brief already written — signals, contacts, and last touches."
+          cta={{ href: "/hunt", label: "Open Movement →" }}
         />
       )}
     </div>
