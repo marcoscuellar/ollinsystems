@@ -77,6 +77,14 @@ export const ActivityIcon = ({ size = 18, className }: IconProps) => (
   </svg>
 );
 
+// Chevrons-left « — points inward to collapse; rotated 180° to expand.
+export const CollapseIcon = ({ size = 18, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <path d="M13 6 7 12l6 6" />
+    <path d="M18.5 6l-6 6 6 6" />
+  </svg>
+);
+
 export const TalentIcon = ({ size = 18, className }: IconProps) => (
   <svg {...base(size)} className={className}>
     <circle cx="12" cy="8" r="3.2" />

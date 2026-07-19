@@ -8,7 +8,7 @@ const DEMO_COOKIE = "cb_demo";
 
 // Flips demo mode on/off by setting the cb_demo cookie, then refreshes so the
 // server components re-render with sample vs. real/empty data.
-export default function DemoToggle({ demo }: { demo: boolean }) {
+export default function DemoToggle({ demo, collapsed = false }: { demo: boolean; collapsed?: boolean }) {
   const router = useRouter();
 
   const toggle = () => {
@@ -20,10 +20,12 @@ export default function DemoToggle({ demo }: { demo: boolean }) {
   return (
     <button
       onClick={toggle}
-      title="Show sample data for demos"
-      className="flex items-center justify-between rounded-btn bg-raised px-4 py-[9px]"
+      title={collapsed ? `Demo mode ${demo ? "on" : "off"}` : "Show sample data for demos"}
+      className={`flex items-center rounded-btn bg-raised py-[9px] ${
+        collapsed ? "justify-center px-3" : "justify-between px-4"
+      }`}
     >
-      <span className="font-mono text-[10px] tracking-[0.08em] text-mist">DEMO MODE</span>
+      {!collapsed && <span className="font-mono text-[10px] tracking-[0.08em] text-mist">DEMO MODE</span>}
       <span
         className={`relative inline-flex h-[18px] w-[32px] flex-none items-center rounded-full transition-colors ${
           demo ? "bg-mint" : "bg-mist/20"
