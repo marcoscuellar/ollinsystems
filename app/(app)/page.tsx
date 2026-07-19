@@ -2,8 +2,13 @@ import Link from "next/link";
 import { auth } from "@/auth";
 import EmptyState from "@/components/EmptyState";
 import LiveDate from "@/components/LiveDate";
+import NewClientsGraph from "@/components/today/NewClientsGraph";
+import FeedCard from "@/components/today/FeedCard";
+import TalentShowcaseCard from "@/components/today/TalentShowcaseCard";
+import OnDeckChecklist from "@/components/today/OnDeckChecklist";
 import { isDemo } from "@/lib/demo";
 import { ACCOUNTS, TODAY_STATS, todayQueue, type Account } from "@/lib/ollin";
+import { LOCAL_INTEL, TEAM_UPDATES, TALENT_SHOWCASE, DECK_ITEMS } from "@/lib/today";
 
 type SessionUser = { user?: { name?: string | null; email?: string | null } | null } | null;
 
@@ -157,6 +162,39 @@ export default async function TodayPage() {
                 Open Movement <span>→</span>
               </Link>
             </aside>
+          </section>
+
+          <section className="grid items-start gap-5 xl:grid-cols-[minmax(0,1.55fr)_minmax(300px,.75fr)]">
+            <div className="flex min-w-0 flex-col gap-5">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="rounded-[18px] bg-mint p-5 text-ink shadow-[0_14px_35px_-28px_rgba(10,16,14,.4)]">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.11em] text-ink/55">GOAL FOR TODAY</div>
+                  <div className="mt-3 flex items-end justify-between gap-4">
+                    <div><strong className="font-display text-[32px] font-semibold leading-none tracking-[-0.04em]">{dailyGoal}</strong><span className="ml-1 font-display text-[15px] font-medium text-ink/55">moves</span></div>
+                    <span className="rounded-full bg-ink/10 px-3 py-1.5 font-mono text-[8px] font-bold tracking-[0.08em]">{completed} COMPLETE</span>
+                  </div>
+                </div>
+                <Link href="/redeploy" className="group rounded-[18px] border border-lite-line bg-white p-5 text-onlite shadow-[0_14px_35px_-28px_rgba(10,16,14,.4)] transition-colors hover:bg-lite-raised">
+                  <div className="font-mono text-[9px] uppercase tracking-[0.11em] text-onlite-faint">REDEPLOY</div>
+                  <div className="mt-3 flex items-end justify-between gap-4">
+                    <div><strong className="font-display text-[32px] font-semibold leading-none tracking-[-0.04em]">1</strong><span className="ml-1 font-display text-[13px] font-medium text-onlite-fog">talent match</span></div>
+                    <span className="font-mono text-[11px] text-onlite-faint transition-transform group-hover:translate-x-1">→</span>
+                  </div>
+                </Link>
+              </div>
+
+              <NewClientsGraph />
+
+              <div className="grid gap-4 md:grid-cols-2">
+                <FeedCard label="LOCAL INTEL" items={LOCAL_INTEL} />
+                <FeedCard label="UPDATES FROM TEAM" items={TEAM_UPDATES} />
+              </div>
+            </div>
+
+            <div className="flex min-w-0 flex-col gap-5">
+              <TalentShowcaseCard talent={TALENT_SHOWCASE} />
+              <OnDeckChecklist items={DECK_ITEMS} />
+            </div>
           </section>
 
           <section className="overflow-hidden rounded-[22px] border border-lite-line bg-white shadow-[0_14px_38px_-30px_rgba(10,16,14,.4)]">
