@@ -18,13 +18,13 @@ import DemoToggle from "@/components/DemoToggle";
 
 type IconType = ComponentType<{ size?: number; className?: string }>;
 type NavItem =
-  | { group: string }
+  | { group: string; href?: string }
   | { href: string; label: string; Icon: IconType; child?: boolean };
 
 const NAV: NavItem[] = [
   { href: "/", label: "Today", Icon: TodayIcon },
   { href: "/hunt", label: "Action", Icon: HuntIcon },
-  { group: "PIPELINE" },
+  { group: "PIPELINE", href: "/pipeline" },
   { href: "/accounts", label: "Accounts", Icon: AccountsIcon, child: true },
   { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon, child: true },
   { href: "/activity", label: "Stats", Icon: ActivityIcon },
@@ -104,13 +104,20 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
       <nav className="flex flex-col gap-1">
         {NAV.map((item, i) => {
           if ("group" in item) {
-            return collapsed ? (
-              <div key={`g-${i}`} className="mx-auto my-2 h-px w-6 bg-muted-line" />
-            ) : (
-              <div
+            if (collapsed) return <div key={`g-${i}`} className="mx-auto my-2 h-px w-6 bg-muted-line" />;
+            const groupClass = "px-[16px] pb-1 pt-3 font-mono text-[10px] tracking-[0.1em]";
+            return item.href ? (
+              <Link
                 key={`g-${i}`}
-                className="px-[16px] pb-1 pt-3 font-mono text-[10px] tracking-[0.1em] text-onink-faint"
+                href={item.href}
+                className={`${groupClass} transition-colors ${
+                  isActive(item.href) ? "text-mint" : "text-onink-faint hover:text-mist"
+                }`}
               >
+                {item.group}
+              </Link>
+            ) : (
+              <div key={`g-${i}`} className={`${groupClass} text-onink-faint`}>
                 {item.group}
               </div>
             );

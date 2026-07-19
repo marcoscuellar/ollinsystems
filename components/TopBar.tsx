@@ -6,6 +6,7 @@ import SupportWidget from "@/components/SupportWidget";
 const TITLE_MAP: Record<string, [string, string]> = {
   "/": ["Today", "Your queue is ready. Start at the top."],
   "/hunt": ["Action", "New companies showing real signals"],
+  "/pipeline": ["Pipeline", "Every lead across every account"],
   "/accounts": ["Accounts", "Every account, one record, both layers"],
   "/campaigns": ["Campaigns", "Prepared by Intelligence. Run by Action."],
   "/activity": ["Stats", "Volume, replies, and what happened"],
