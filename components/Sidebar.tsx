@@ -7,6 +7,7 @@ import {
   OllinMark,
   TodayIcon,
   HuntIcon,
+  PipelineIcon,
   AccountsIcon,
   CampaignsIcon,
   ActivityIcon,
@@ -17,16 +18,14 @@ import SignOutButton from "@/components/SignOutButton";
 import DemoToggle from "@/components/DemoToggle";
 
 type IconType = ComponentType<{ size?: number; className?: string }>;
-type NavItem =
-  | { group: string; href?: string }
-  | { href: string; label: string; Icon: IconType; child?: boolean };
+type NavItem = { href: string; label: string; Icon: IconType };
 
 const NAV: NavItem[] = [
   { href: "/", label: "Today", Icon: TodayIcon },
   { href: "/hunt", label: "Movement", Icon: HuntIcon },
-  { group: "PIPELINE", href: "/pipeline" },
-  { href: "/accounts", label: "Accounts", Icon: AccountsIcon, child: true },
-  { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon, child: true },
+  { href: "/pipeline", label: "Pipeline", Icon: PipelineIcon },
+  { href: "/accounts", label: "Accounts", Icon: AccountsIcon },
+  { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon },
   { href: "/activity", label: "Stats", Icon: ActivityIcon },
   { href: "/talent-showcase", label: "Talent Showcase", Icon: TalentIcon },
 ];
@@ -69,9 +68,9 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
   const displayName = userEmail ? userEmail.split("@")[0] : "You";
   const subline = userEmail || "Not signed in";
 
-  const navLinkClass = (active: boolean, child?: boolean) =>
+  const navLinkClass = (active: boolean) =>
     `flex w-full items-center rounded-btn py-[11px] text-left font-display text-sm font-semibold transition-colors ${
-      collapsed ? "justify-center px-0" : child ? "gap-[11px] pl-[32px] pr-[16px]" : "gap-[11px] px-[16px]"
+      collapsed ? "justify-center px-0" : "gap-[11px] px-[16px]"
     } ${
       active ? "bg-mist text-ink" : "bg-transparent text-onink-soft hover:bg-white/[0.05] hover:text-mist"
     }`;
@@ -102,33 +101,14 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
       </div>
 
       <nav className="flex flex-col gap-1">
-        {NAV.map((item, i) => {
-          if ("group" in item) {
-            if (collapsed) return <div key={`g-${i}`} className="mx-auto my-2 h-px w-6 bg-muted-line" />;
-            const groupClass = "px-[16px] pb-1 pt-3 font-mono text-[10px] tracking-[0.1em]";
-            return item.href ? (
-              <Link
-                key={`g-${i}`}
-                href={item.href}
-                className={`${groupClass} transition-colors ${
-                  isActive(item.href) ? "text-mint" : "text-onink-faint hover:text-mist"
-                }`}
-              >
-                {item.group}
-              </Link>
-            ) : (
-              <div key={`g-${i}`} className={`${groupClass} text-onink-faint`}>
-                {item.group}
-              </div>
-            );
-          }
-          const { href, label, Icon, child } = item;
+        {NAV.map((item) => {
+          const { href, label, Icon } = item;
           const active = isActive(href);
           return (
             <Link
               key={href}
               href={href}
-              className={navLinkClass(active, child)}
+              className={navLinkClass(active)}
               title={collapsed ? label : undefined}
             >
               <Icon />
