@@ -17,8 +17,8 @@ export default function AccountsPage() {
           cta={{ href: "/hunt", label: "Open Hunt →" }}
         />
       ) : (
-        <div className="overflow-hidden rounded-card bg-lite">
-          <div className="grid grid-cols-[1.4fr_1fr_1fr_0.6fr_auto] gap-4 border-b border-lite-line px-6 py-3 font-mono text-[10px] tracking-[0.08em] text-onlite-faint">
+        <div className="overflow-hidden rounded-card bg-ink">
+          <div className="grid grid-cols-[1.4fr_1fr_1fr_0.6fr_auto] gap-4 border-b border-muted-line px-6 py-3 font-mono text-[10px] tracking-[0.08em] text-onink-faint">
             <span>ACCOUNT</span>
             <span>PRIMARY SIGNAL</span>
             <span>EMPHASIZE</span>
@@ -29,15 +29,15 @@ export default function AccountsPage() {
             <Link
               key={a.id}
               href={`/accounts/${a.id}`}
-              className="grid grid-cols-[1.4fr_1fr_1fr_0.6fr_auto] items-center gap-4 border-b border-lite-line px-6 py-4 transition-colors last:border-0 hover:bg-lite-raised"
+              className="grid grid-cols-[1.4fr_1fr_1fr_0.6fr_auto] items-center gap-4 border-b border-muted-line px-6 py-4 transition-colors last:border-0 hover:bg-raised"
             >
               <div>
-                <div className="font-display text-[15px] font-bold text-onlite">{a.name}</div>
-                <div className="text-[12px] text-onlite-fog">{a.industry} · {a.location}</div>
+                <div className="font-display text-[15px] font-bold text-paper">{a.name}</div>
+                <div className="text-[12px] text-muted-fog">{a.industry} · {a.location}</div>
               </div>
-              <div className="truncate text-[13px] text-onlite-soft">{a.primarySignal}</div>
-              <div className="truncate text-[13px] text-onlite-soft">{a.offering.primary}</div>
-              <span className="font-mono text-[10px] text-onlite-fog">{a.status.toUpperCase()}</span>
+              <div className="truncate text-[13px] text-onink-soft">{a.primarySignal}</div>
+              <div className="truncate text-[13px] text-onink-soft">{a.offering.primary}</div>
+              <span className="font-mono text-[10px] text-muted-fog">{a.status.toUpperCase()}</span>
               <ArrowIcon size={15} className="text-mint" />
             </Link>
           ))}

@@ -35,18 +35,18 @@ export default function CampaignsPage() {
                     <Link
                       key={a.id}
                       href={`/accounts/${a.id}`}
-                      className="group flex items-center gap-5 rounded-card bg-lite p-5 transition-colors hover:bg-lite-raised"
+                      className="group flex items-center gap-5 rounded-card bg-ink p-5 transition-colors hover:bg-raised"
                     >
                       <div className="min-w-0 flex-1">
-                        <div className="font-display text-[16px] font-bold text-onlite">{a.name}</div>
-                        <div className="mt-[2px] truncate text-[13px] text-onlite-fog">{a.campaign.observation}</div>
+                        <div className="font-display text-[16px] font-bold text-paper">{a.name}</div>
+                        <div className="mt-[2px] truncate text-[13px] text-muted-fog">{a.campaign.observation}</div>
                       </div>
                       <div className="flex w-[180px] flex-none flex-col gap-[6px]">
-                        <div className="flex justify-between font-mono text-[10px] text-onlite-faint">
+                        <div className="flex justify-between font-mono text-[10px] text-onink-faint">
                           <span>TOUCHES</span>
                           <span>{done}/{total}</span>
                         </div>
-                        <div className="h-[6px] overflow-hidden rounded-full bg-[rgba(10,16,14,0.08)]">
+                        <div className="h-[6px] overflow-hidden rounded-full bg-mist/10">
                           <div className="h-full rounded-full bg-mint" style={{ width: `${(done / total) * 100}%` }} />
                         </div>
                       </div>
