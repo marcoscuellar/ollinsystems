@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
 import { complete, hasApiKey, type ChatMessage } from "@/lib/anthropic";
 
 export const runtime = "nodejs";
@@ -13,6 +14,16 @@ const KEY_MISSING =
   "Coach Bob isn't connected to his AI yet. Add an ANTHROPIC_API_KEY to the server environment to turn drafting and coaching on.";
 
 export async function POST(req: NextRequest) {
+  // Costs real API money per call — restricted to approved accounts so a
+  // wide-open trial signup (or a bot that finds this URL) can't drain it.
+  const session = await auth();
+  if (!session?.user?.approved) {
+    return NextResponse.json(
+      { error: "This feature isn't available on your account yet.", code: "not_approved" },
+      { status: 403 },
+    );
+  }
+
   if (!hasApiKey()) {
     return NextResponse.json({ error: KEY_MISSING, code: "no_api_key" }, { status: 503 });
   }

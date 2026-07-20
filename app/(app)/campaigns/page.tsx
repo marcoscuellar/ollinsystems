@@ -6,8 +6,8 @@ import { ACCOUNTS } from "@/lib/ollin";
 
 const ORDER = ["Awaiting review", "Active", "Draft", "Approved", "Paused", "Completed"] as const;
 
-export default function CampaignsPage() {
-  const demo = isDemo();
+export default async function CampaignsPage() {
+  const demo = await isDemo();
   const accounts = demo ? ACCOUNTS : [];
 
   return (

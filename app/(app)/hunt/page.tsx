@@ -3,8 +3,8 @@ import ActionQueue from "@/components/action/ActionQueue";
 import { isDemo } from "@/lib/demo";
 
 // Movement — the main working surface: today's ranked outreach queue.
-export default function MovementPage() {
-  const demo = isDemo();
+export default async function MovementPage() {
+  const demo = await isDemo();
 
   return (
     <div className="flex flex-col gap-4 px-16 py-8 xl:px-32">

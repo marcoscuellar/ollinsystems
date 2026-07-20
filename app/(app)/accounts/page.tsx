@@ -3,8 +3,8 @@ import AccountsGrid from "@/components/accounts/AccountsGrid";
 import { isDemo } from "@/lib/demo";
 
 // Accounts — one card per client company; each opens in place to full intel.
-export default function AccountsPage() {
-  const demo = isDemo();
+export default async function AccountsPage() {
+  const demo = await isDemo();
 
   return (
     <div className="flex flex-col gap-4 px-16 py-8 xl:px-32">

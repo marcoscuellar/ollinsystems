@@ -27,10 +27,25 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         if (!email || !password) return null;
         const user = await verifyUser(email, password);
         if (!user) return null;
-        return { id: user.id, email: user.email, name: user.name };
+        return { id: user.id, email: user.email, name: user.name, approved: user.approved };
       },
     }),
   ],
   pages: { signIn: "/login" },
   trustHost: true,
+  callbacks: {
+    // Used by middleware.ts to decide whether a request may reach the app —
+    // signed out visitors get bounced to /login instead of seeing real pages.
+    authorized({ auth }) {
+      return Boolean(auth?.user);
+    },
+    async jwt({ token, user }) {
+      if (user) token.approved = user.approved;
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.approved = Boolean(token.approved);
+      return session;
+    },
+  },
 });

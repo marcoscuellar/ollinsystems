@@ -27,7 +27,7 @@ function statusTone(account: Account) {
 }
 
 export default async function TodayPage() {
-  const demo = isDemo();
+  const demo = await isDemo();
   const session = await auth();
   const accounts = demo ? ACCOUNTS : [];
   const stats = TODAY_STATS(accounts);

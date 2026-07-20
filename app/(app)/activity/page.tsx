@@ -12,8 +12,8 @@ const KIND_STYLE: Record<string, string> = {
   Note: "bg-mist/10 text-muted-fog",
 };
 
-export default function ActivityPage() {
-  const demo = isDemo();
+export default async function ActivityPage() {
+  const demo = await isDemo();
   const items = demo ? ACTIVITY : [];
 
   return (

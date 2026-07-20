@@ -19,10 +19,22 @@ export type UserRecord = {
   name: string;
   passwordHash: string;
   createdAt: number;
+  approved: boolean;
 };
 
 const normalize = (email: string) => email.trim().toLowerCase();
 const key = (email: string) => `cbuser:${normalize(email)}`;
+
+/** Comma-separated allowlist (ADMIN_EMAILS env var) — always treated as
+ *  approved, regardless of what's stored on the record. Lets you approve
+ *  yourself without a manual data migration. */
+export function isAdminEmail(email: string): boolean {
+  const list = (process.env.ADMIN_EMAILS ?? "")
+    .split(",")
+    .map((e) => e.trim().toLowerCase())
+    .filter(Boolean);
+  return list.includes(normalize(email));
+}
 
 export async function getUser(email: string): Promise<UserRecord | null> {
   if (!redis || !email) return null;
@@ -48,15 +60,21 @@ export async function createUser(input: {
     name: input.name?.trim() || "",
     passwordHash: await bcrypt.hash(input.password, 10),
     createdAt: Date.now(),
+    // Self-serve signups start locked to demo data. Only ADMIN_EMAILS (or a
+    // manually-flipped record) get real access and the AI endpoints.
+    approved: isAdminEmail(email),
   };
   await redis.set(key(email), user);
   return { ok: true };
 }
 
-/** Returns the user if the password matches, otherwise null. */
+/** Returns the user if the password matches, otherwise null. Approval checks
+ *  the allowlist too, so adding an email to ADMIN_EMAILS approves existing
+ *  accounts without a data migration. */
 export async function verifyUser(email: string, password: string): Promise<UserRecord | null> {
   const user = await getUser(email);
   if (!user) return null;
   const ok = await bcrypt.compare(password, user.passwordHash);
-  return ok ? user : null;
+  if (!ok) return null;
+  return { ...user, approved: user.approved || isAdminEmail(user.email) };
 }

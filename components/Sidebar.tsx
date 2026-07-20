@@ -41,7 +41,15 @@ function initials(name: string) {
   );
 }
 
-export default function Sidebar({ userEmail, demo = false }: { userEmail?: string; demo?: boolean }) {
+export default function Sidebar({
+  userEmail,
+  demo = false,
+  canToggleDemo = false,
+}: {
+  userEmail?: string;
+  demo?: boolean;
+  canToggleDemo?: boolean;
+}) {
   const pathname = usePathname();
   const isActive = (href: string) => (href === "/" ? pathname === "/" : pathname.startsWith(href));
 
@@ -136,7 +144,19 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
           </div>
         )}
 
-        <DemoToggle demo={demo} collapsed={collapsed} />
+        {canToggleDemo ? (
+          <DemoToggle demo={demo} collapsed={collapsed} />
+        ) : (
+          <div
+            title="Demo data — ask for an approved account for live access"
+            className={`flex items-center rounded-btn bg-raised py-[9px] ${
+              collapsed ? "justify-center px-3" : "justify-between px-4"
+            }`}
+          >
+            {!collapsed && <span className="font-mono text-[10px] tracking-[0.08em] text-mist">DEMO MODE</span>}
+            <span className="h-2 w-2 flex-none rounded-full bg-mint" />
+          </div>
+        )}
 
         {collapsed ? (
           <div
