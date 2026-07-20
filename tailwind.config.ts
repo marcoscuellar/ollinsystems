@@ -3,7 +3,8 @@ import type { Config } from "tailwindcss";
 /**
  * OLLIN — "Signal" brand system. Intelligence meets action.
  * Three real colors do all the work (sampled from the locked palette):
- *   Ink  #0A100E — dark surfaces + text on light
+ *   Ink  #1B2721 — dark surfaces + text on light. A soft charcoal, not black —
+ *        enough white mixed in to keep dark cards from reading as a void.
  *   Mint #64D99E — the accent. Action-only: next steps, verified, live signals.
  *   Mist #E3E9E7 — light surface + text on dark
  * Two supporting values: page bg #0A150F (greener ink, gives depth without
@@ -20,9 +21,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0A100E", // card/dark surface
+        ink: "#1B2721", // card/dark surface — a soft charcoal, not black
         night: "#0A150F", // page background (slightly greener than ink)
-        raised: "#101915", // raised dark surface (hover, nested)
+        raised: "#253630", // raised dark surface (hover, nested) — lighter than ink
         mint: {
           DEFAULT: "#64D99E",
           deep: "#35B779", // locked OLLIN hover / movement state
