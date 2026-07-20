@@ -28,10 +28,10 @@ function matches(a: Account, query: string) {
   return haystack.includes(needle);
 }
 
-// Accounts — the single blended view of Pipeline + Accounts. One search bar,
-// one card per company, each pulling its intel straight from the same
-// Intelligence records the account brief reads from. Cards expand in place
-// (spanning 2 columns) to reveal the white intel panel.
+// Accounts — the single blended view of Pipeline + Accounts. One search bar
+// on the light workspace; every card stays dark ink, the system's signal for
+// "prepared by Intelligence." Cards expand in place (spanning 2 columns) to
+// reveal the rest of the same brief the [id] page renders in full.
 export default function AccountsGrid() {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState<Record<string, boolean>>({});
@@ -86,7 +86,7 @@ export default function AccountsGrid() {
 
 function Label({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return (
-    <div className={`font-mono text-[10px] tracking-[0.08em] text-[rgba(10,16,14,0.45)] ${className}`}>
+    <div className={`font-mono text-[10px] tracking-[0.08em] text-onink-faint ${className}`}>
       {children}
     </div>
   );
@@ -95,9 +95,9 @@ function Label({ children, className = "" }: { children: React.ReactNode; classN
 function AuditStamp({ s }: { s: Signal }) {
   const style =
     s.audit === "Verified"
-      ? "bg-mint/15 text-mint-deep"
+      ? "bg-mint/15 text-mint"
       : s.audit === "Partial"
-        ? "bg-[rgba(10,16,14,0.08)] text-[rgba(10,16,14,0.6)]"
+        ? "bg-mist/15 text-mist"
         : "bg-alert/15 text-alert";
   return (
     <span className={`whitespace-nowrap rounded-btn px-[8px] py-[2px] font-mono text-[9px] tracking-[0.06em] ${style}`}>
@@ -143,7 +143,7 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
       </button>
 
       {open && (
-        <div className="grid grid-cols-[1.3fr_1fr] gap-7 bg-white px-[22px] pb-[26px] pt-5">
+        <div className="grid grid-cols-[1.3fr_1fr] gap-7 border-t border-muted-line bg-raised px-[22px] pb-[26px] pt-5">
           {/* Left — signals + open roles, straight from Intelligence */}
           <div>
             <Label className="mb-3">COMPANY INTEL</Label>
@@ -154,9 +154,9 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
                 ["SIZE", acc.size],
                 ["STATUS", acc.status],
               ].map(([k, v]) => (
-                <div key={k} className="rounded-[12px] bg-[rgba(63,191,127,0.12)] px-3 py-[10px]">
-                  <div className="text-[11px] text-[#2E9A63]">{k}</div>
-                  <div className="mt-[2px] text-[13.5px] font-semibold text-ink">{v}</div>
+                <div key={k} className="rounded-[12px] bg-mint/[0.07] px-3 py-[10px]">
+                  <div className="text-[11px] text-mint">{k}</div>
+                  <div className="mt-[2px] text-[13.5px] font-semibold text-mist">{v}</div>
                 </div>
               ))}
             </div>
@@ -164,12 +164,12 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
             <Label className="mb-[10px] mt-5">WHY NOW · SIGNALS</Label>
             <div className="flex flex-col gap-3">
               {acc.signals.map((s) => (
-                <div key={s.title} className="border-b border-[rgba(10,16,14,0.08)] pb-3 last:border-0 last:pb-0">
+                <div key={s.title} className="border-b border-muted-line pb-3 last:border-0 last:pb-0">
                   <div className="flex items-start justify-between gap-2">
-                    <div className="text-[13px] font-semibold text-ink">{s.title}</div>
+                    <div className="text-[13px] font-semibold text-mist">{s.title}</div>
                     <AuditStamp s={s} />
                   </div>
-                  <div className="mt-[3px] font-mono text-[9.5px] tracking-[0.05em] text-[rgba(10,16,14,0.45)]">
+                  <div className="mt-[3px] font-mono text-[9.5px] tracking-[0.05em] text-onink-faint">
                     {s.durability} · {s.category.toUpperCase()} · {s.date.toUpperCase()}
                   </div>
                 </div>
@@ -181,13 +181,13 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
                 <Label className="mb-[10px] mt-5">OPEN ROLES · EVIDENCE OF DEMAND</Label>
                 <div className="flex flex-col">
                   {acc.openRoles.map((r) => (
-                    <div key={r.title} className="flex items-center justify-between border-b border-[rgba(10,16,14,0.08)] py-[8px] last:border-0">
+                    <div key={r.title} className="flex items-center justify-between border-b border-muted-line py-[8px] last:border-0">
                       <div>
-                        <div className="text-[13px] font-semibold text-ink">{r.title}</div>
-                        <div className="text-[11.5px] text-[rgba(10,16,14,0.55)]">{r.location} · {r.daysOpen} days open</div>
+                        <div className="text-[13px] font-semibold text-mist">{r.title}</div>
+                        <div className="text-[11.5px] text-onink-faint">{r.location} · {r.daysOpen} days open</div>
                       </div>
                       {r.verified && (
-                        <span className="flex items-center gap-1 font-mono text-[9px] text-mint-deep">
+                        <span className="flex items-center gap-1 font-mono text-[9px] text-mint">
                           <CheckIcon size={11} /> VERIFIED
                         </span>
                       )}
@@ -202,25 +202,25 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
           <div>
             <Label className="mb-3">WHO TO CONTACT</Label>
             {acc.contacts.map((c) => (
-              <div key={c.name} className="border-b border-[rgba(10,16,14,0.08)] py-2 last:border-0">
+              <div key={c.name} className="border-b border-muted-line py-2 last:border-0">
                 <div className="flex items-center justify-between">
-                  <span className="text-[13.5px] font-semibold text-ink">{c.name}</span>
-                  <span className="rounded-btn bg-[rgba(10,16,14,0.06)] px-2 py-[3px] font-mono text-[9px] text-[rgba(10,16,14,0.6)]">
+                  <span className="text-[13.5px] font-semibold text-paper">{c.name}</span>
+                  <span className="rounded-btn bg-mist/10 px-2 py-[3px] font-mono text-[9px] text-mist">
                     {c.persona.toUpperCase()}
                   </span>
                 </div>
-                <div className="text-[12px] text-[rgba(10,16,14,0.55)]">{c.title}</div>
+                <div className="text-[12px] text-onink-faint">{c.title}</div>
               </div>
             ))}
 
-            <div className="mt-5 rounded-[16px] bg-[rgba(63,191,127,0.12)] p-4">
-              <div className="text-[11px] text-[#2E9A63]">NEXT ACTION</div>
-              <div className="mt-1 text-[13.5px] font-semibold text-ink">{acc.nextAction}</div>
+            <div className="mt-5 rounded-[16px] bg-mint/[0.07] p-4">
+              <div className="text-[11px] text-mint">NEXT ACTION</div>
+              <div className="mt-1 text-[13.5px] font-semibold text-paper">{acc.nextAction}</div>
             </div>
 
             <Link
               href={`/accounts/${acc.id}`}
-              className="mt-5 inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.06em] text-[rgba(10,16,14,0.55)] underline underline-offset-2 transition-colors hover:text-mint-deep"
+              className="mt-5 inline-flex items-center gap-1 font-mono text-[11px] tracking-[0.06em] text-onink-faint underline underline-offset-2 transition-colors hover:text-mint"
             >
               Open full intelligence brief <LinkOutIcon size={12} />
             </Link>
