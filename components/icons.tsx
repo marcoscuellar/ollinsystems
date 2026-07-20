@@ -126,6 +126,13 @@ export const LinkOutIcon = ({ size = 14, className }: IconProps) => (
   </svg>
 );
 
+export const SearchIcon = ({ size = 16, className }: IconProps) => (
+  <svg {...base(size)} className={className}>
+    <circle cx="11" cy="11" r="7" />
+    <path d="M20 20l-4.3-4.3" />
+  </svg>
+);
+
 // Legacy names some shared components may still reference.
 export const HomeIcon = TodayIcon;
 export const ComposeIcon = CampaignsIcon;

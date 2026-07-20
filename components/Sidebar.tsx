@@ -7,7 +7,6 @@ import {
   OllinMark,
   TodayIcon,
   HuntIcon,
-  PipelineIcon,
   AccountsIcon,
   CampaignsIcon,
   ActivityIcon,
@@ -23,7 +22,6 @@ type NavItem = { href: string; label: string; Icon: IconType };
 const NAV: NavItem[] = [
   { href: "/", label: "Today", Icon: TodayIcon },
   { href: "/hunt", label: "Movement", Icon: HuntIcon },
-  { href: "/pipeline", label: "Pipeline", Icon: PipelineIcon },
   { href: "/accounts", label: "Accounts", Icon: AccountsIcon },
   { href: "/campaigns", label: "Campaigns", Icon: CampaignsIcon },
   { href: "/activity", label: "Stats", Icon: ActivityIcon },
