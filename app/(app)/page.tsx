@@ -187,7 +187,7 @@ export default async function TodayPage() {
 
               <div className="grid gap-4 md:grid-cols-2">
                 <FeedCard label="LOCAL INTEL" items={LOCAL_INTEL} />
-                <FeedCard label="UPDATES FROM TEAM" items={TEAM_UPDATES} />
+                <FeedCard label="UPDATES FROM TEAM" items={TEAM_UPDATES} dark={false} />
               </div>
             </div>
 

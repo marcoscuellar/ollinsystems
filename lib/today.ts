@@ -67,7 +67,7 @@ export const DECK_ITEMS: DeckItem[] = [
   { id: "new-companies", html: `<b>5</b> new companies surfaced`, href: "/hunt", crmOnly: false },
   { id: "outreaches-ready", html: `<b>20</b> new outreaches ready to send`, href: "/campaigns", crmOnly: false },
   { id: "outreaches-left", html: `<b>13</b> outreaches left over from yesterday`, href: "/campaigns", crmOnly: false },
-  { id: "linkedin-post", html: `LinkedIn post — <span class="text-mint font-semibold">not done yet</span>`, href: "/campaigns", crmOnly: false },
+  { id: "linkedin-post", html: `LinkedIn post — <span class="text-mint-deep font-semibold">not done yet</span>`, href: "/campaigns", crmOnly: false },
   { id: "check-jobs", html: `CRM: check jobs board for new reqs`, href: "/hunt", crmOnly: true },
   { id: "present-candidates", html: `CRM: present 3 candidates to <b>Prairie Financial</b>`, href: "/accounts/prairie-financial", crmOnly: true },
 ];
