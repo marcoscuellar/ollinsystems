@@ -75,7 +75,7 @@ export default function Sidebar({ userEmail, demo = false }: { userEmail?: strin
 
   return (
     <aside
-      className={`flex h-full flex-col gap-[22px] overflow-y-auto overflow-x-hidden border-r border-muted-line bg-ink py-[22px] text-mist transition-[width] duration-200 ease-out ${
+      className={`relative z-10 flex h-full flex-col gap-[22px] overflow-y-auto overflow-x-hidden border-r border-muted-line bg-ink py-[22px] text-mist shadow-[8px_0_30px_-16px_rgba(10,16,14,0.55)] transition-[width] duration-200 ease-out ${
         collapsed ? "w-[76px] px-3" : "w-[236px] px-4"
       }`}
     >
