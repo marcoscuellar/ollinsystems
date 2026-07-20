@@ -25,11 +25,12 @@ export type UserRecord = {
 const normalize = (email: string) => email.trim().toLowerCase();
 const key = (email: string) => `cbuser:${normalize(email)}`;
 
-/** Comma-separated allowlist (ADMIN_EMAILS env var) — always treated as
- *  approved, regardless of what's stored on the record. Lets you approve
- *  yourself without a manual data migration. */
-export function isAdminEmail(email: string): boolean {
-  const list = (process.env.ADMIN_EMAILS ?? "")
+/** Comma-separated allowlist (APPROVED_EMAILS env var) — always treated as
+ *  approved, regardless of what's stored on the record. This isn't limited to
+ *  internal staff: add an agency's email here once they've signed up (or
+ *  paid) and they get real access — no data migration needed. */
+export function isApprovedEmail(email: string): boolean {
+  const list = (process.env.APPROVED_EMAILS ?? "")
     .split(",")
     .map((e) => e.trim().toLowerCase())
     .filter(Boolean);
@@ -60,21 +61,21 @@ export async function createUser(input: {
     name: input.name?.trim() || "",
     passwordHash: await bcrypt.hash(input.password, 10),
     createdAt: Date.now(),
-    // Self-serve signups start locked to demo data. Only ADMIN_EMAILS (or a
+    // Self-serve signups start locked to demo data. Only APPROVED_EMAILS (or a
     // manually-flipped record) get real access and the AI endpoints.
-    approved: isAdminEmail(email),
+    approved: isApprovedEmail(email),
   };
   await redis.set(key(email), user);
   return { ok: true };
 }
 
 /** Returns the user if the password matches, otherwise null. Approval checks
- *  the allowlist too, so adding an email to ADMIN_EMAILS approves existing
+ *  the allowlist too, so adding an email to APPROVED_EMAILS approves existing
  *  accounts without a data migration. */
 export async function verifyUser(email: string, password: string): Promise<UserRecord | null> {
   const user = await getUser(email);
   if (!user) return null;
   const ok = await bcrypt.compare(password, user.passwordHash);
   if (!ok) return null;
-  return { ...user, approved: user.approved || isAdminEmail(user.email) };
+  return { ...user, approved: user.approved || isApprovedEmail(user.email) };
 }
