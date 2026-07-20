@@ -372,7 +372,10 @@ export default function LoginForm() {
         <div className="mx-auto flex max-w-[1440px] flex-col gap-4 border-t border-muted-line pt-8 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <OllinMark size={26} />
-            <span className="font-display text-[16px] font-bold tracking-[0.04em] text-paper">OLLIN</span>
+            <div>
+              <span className="font-display text-[16px] font-bold tracking-[0.04em] text-paper">OLLIN</span>
+              <div className="font-mono text-[10px] tracking-[0.08em] text-onink-faint">ollinos.com</div>
+            </div>
           </div>
           <p className="font-mono text-[9px] tracking-[0.11em] text-onink-faint">
             DISCOVER → VERIFY → UNDERSTAND → PREPARE → MOVE → CONVERT
