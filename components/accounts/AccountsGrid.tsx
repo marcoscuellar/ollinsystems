@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { ACCOUNTS, type Account, type Signal, type Urgency } from "@/lib/ollin";
 import { CheckIcon, LinkOutIcon, SearchIcon } from "@/components/icons";
 
@@ -108,8 +109,13 @@ function AuditStamp({ s }: { s: Signal }) {
 
 function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean; onToggle: () => void }) {
   return (
-    <div className={`overflow-hidden rounded-card bg-ink ${open ? "col-span-2" : "col-span-1"}`}>
-      <button
+    <motion.div
+      layout
+      transition={{ layout: { duration: 0.28, ease: [0.22, 1, 0.36, 1] } }}
+      className={`overflow-hidden rounded-card bg-ink ${open ? "col-span-2" : "col-span-1"}`}
+    >
+      <motion.button
+        whileTap={{ scale: 0.98 }}
         onClick={onToggle}
         className="flex min-h-[170px] w-full cursor-pointer flex-col p-[22px] text-left"
       >
@@ -140,9 +146,18 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
           {acc.primarySignal}
         </div>
         <div className="mt-1 line-clamp-2 text-[13px] leading-[1.5] text-onink-soft">{acc.whoTheyAre}</div>
-      </button>
+      </motion.button>
 
-      {open && (
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            key="panel"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
         <div className="grid grid-cols-[1.3fr_1fr] gap-7 border-t border-muted-line bg-raised px-[22px] pb-[26px] pt-5">
           {/* Left — signals + open roles, straight from Intelligence */}
           <div>
@@ -226,7 +241,9 @@ function AccountGridCard({ acc, open, onToggle }: { acc: Account; open: boolean;
             </Link>
           </div>
         </div>
-      )}
-    </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }

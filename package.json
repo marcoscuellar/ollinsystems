@@ -2,7 +2,7 @@
   "name": "ollin",
   "version": "0.1.0",
   "private": true,
-  "description": "OLLIN \u2014 Intelligence meets action. Revenue intelligence + guided campaign execution in one platform.",
+  "description": "OLLIN — Intelligence meets action. Revenue intelligence + guided campaign execution in one platform.",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -15,6 +15,7 @@
     "@auth/upstash-redis-adapter": "^2.11.2",
     "@upstash/redis": "^1.38.0",
     "bcryptjs": "^2.4.3",
+    "motion": "^12.42.2",
     "next": "14.2.15",
     "next-auth": "^5.0.0-beta.31",
     "react": "^18.3.1",

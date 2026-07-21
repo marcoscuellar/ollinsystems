@@ -6,6 +6,7 @@ import NewClientsGraph from "@/components/today/NewClientsGraph";
 import FeedCard from "@/components/today/FeedCard";
 import TalentShowcaseCard from "@/components/today/TalentShowcaseCard";
 import OnDeckChecklist from "@/components/today/OnDeckChecklist";
+import PriorityCTA from "@/components/today/PriorityCTA";
 import { isDemo } from "@/lib/demo";
 import { ACCOUNTS, TODAY_STATS, todayQueue, type Account } from "@/lib/ollin";
 import { LOCAL_INTEL, TEAM_UPDATES, TALENT_SHOWCASE, DECK_ITEMS } from "@/lib/today";
@@ -127,12 +128,7 @@ export default async function TodayPage() {
                       </div>
                     </div>
                   </div>
-                  <Link
-                    href={`/accounts/${priority.id}`}
-                    className="mt-auto flex items-center justify-between rounded-[11px] bg-mint px-5 py-4 font-display text-[13px] font-bold text-ink transition-colors hover:bg-mint-deep"
-                  >
-                    Open prepared account <span>→</span>
-                  </Link>
+                  <PriorityCTA href={`/accounts/${priority.id}`} />
                 </div>
               </div>
             </article>
