@@ -92,3 +92,11 @@ export async function verifyUser(email: string, password: string): Promise<UserR
   if (!ok) return null;
   return { ...user, approved: user.approved || isApprovedEmail(user.email) };
 }
+
+/** Deletes an account record outright, so it can be recreated with a fresh
+ *  password. Only used by /api/admin/reset-account, which restricts this to
+ *  APPROVED_EMAILS — never callable for an arbitrary email. */
+export async function deleteUser(email: string): Promise<void> {
+  if (!redis) return;
+  await redis.del(key(email));
+}
