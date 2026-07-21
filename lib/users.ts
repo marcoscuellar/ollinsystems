@@ -39,7 +39,15 @@ export function isApprovedEmail(email: string): boolean {
 
 export async function getUser(email: string): Promise<UserRecord | null> {
   if (!redis || !email) return null;
-  return (await redis.get<UserRecord>(key(email))) ?? null;
+  try {
+    return (await redis.get<UserRecord>(key(email))) ?? null;
+  } catch (err) {
+    // A Redis hiccup here must never bubble up as an uncaught error inside
+    // NextAuth's authorize() — that shows visitors the cryptic generic
+    // "server configuration" error page instead of a clean sign-in failure.
+    console.error("[getUser] KV read failed", err);
+    return null;
+  }
 }
 
 /** Create an account. Returns an error string if the email is taken or KV is off. */
@@ -51,22 +59,27 @@ export async function createUser(input: {
   if (!redis) return { ok: false, error: "Accounts aren't set up yet. Try again shortly." };
 
   const email = normalize(input.email);
-  if (await redis.get(key(email))) {
-    return { ok: false, error: "An account with that email already exists. Try signing in." };
-  }
+  try {
+    if (await redis.get(key(email))) {
+      return { ok: false, error: "An account with that email already exists. Try signing in." };
+    }
 
-  const user: UserRecord = {
-    id: crypto.randomUUID(),
-    email,
-    name: input.name?.trim() || "",
-    passwordHash: await bcrypt.hash(input.password, 10),
-    createdAt: Date.now(),
-    // Self-serve signups start locked to demo data. Only APPROVED_EMAILS (or a
-    // manually-flipped record) get real access and the AI endpoints.
-    approved: isApprovedEmail(email),
-  };
-  await redis.set(key(email), user);
-  return { ok: true };
+    const user: UserRecord = {
+      id: crypto.randomUUID(),
+      email,
+      name: input.name?.trim() || "",
+      passwordHash: await bcrypt.hash(input.password, 10),
+      createdAt: Date.now(),
+      // Self-serve signups start locked to demo data. Only APPROVED_EMAILS (or a
+      // manually-flipped record) get real access and the AI endpoints.
+      approved: isApprovedEmail(email),
+    };
+    await redis.set(key(email), user);
+    return { ok: true };
+  } catch (err) {
+    console.error("[createUser] KV write failed", err);
+    return { ok: false, error: "Couldn't create that account right now. Try again shortly." };
+  }
 }
 
 /** Returns the user if the password matches, otherwise null. Approval checks
