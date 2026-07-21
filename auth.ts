@@ -1,11 +1,16 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { verifyUser } from "@/lib/users";
+import { authConfig } from "@/auth.config";
 
 // Real accounts — NextAuth (Auth.js v5) with email + password, verified against
 // the ollin-kv (Upstash Redis) user store. Passwords are bcrypt-hashed in
 // lib/users. Credentials auth requires JWT sessions (no database session rows).
 // Everything is env-guarded so a missing key never crashes the build/site.
+//
+// This file (Node-only: bcrypt + Redis) is used by API routes and server
+// components. middleware.ts uses auth.config.ts's Edge-safe subset instead —
+// see the comment there for why the split exists.
 
 const hasKv = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOKEN);
 
@@ -13,6 +18,7 @@ const hasKv = Boolean(process.env.KV_REST_API_URL && process.env.KV_REST_API_TOK
 export const authEnabled = Boolean(process.env.AUTH_SECRET && hasKv);
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
+  ...authConfig,
   // JWT sessions kept in a signed cookie. 90-day lifetime so you stay logged in.
   session: { strategy: "jwt", maxAge: 60 * 60 * 24 * 90 },
   providers: [
@@ -31,21 +37,4 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       },
     }),
   ],
-  pages: { signIn: "/login" },
-  trustHost: true,
-  callbacks: {
-    // Used by middleware.ts to decide whether a request may reach the app —
-    // signed out visitors get bounced to /login instead of seeing real pages.
-    authorized({ auth }) {
-      return Boolean(auth?.user);
-    },
-    async jwt({ token, user }) {
-      if (user) token.approved = user.approved;
-      return token;
-    },
-    async session({ session, token }) {
-      session.user.approved = Boolean(token.approved);
-      return session;
-    },
-  },
 });
